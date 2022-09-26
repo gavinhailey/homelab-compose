@@ -1,0 +1,11 @@
+version: "3"
+services:
+  musicbot:
+    image: justsomebots/musicbot:master
+    container_name: musicbot
+    restart: unless-stopped
+    volumes:
+      - ./config:/musicbot/config/
+      - ./audio_cache:/musicbot/audio_cache
+      - ./data:/musicbot/data
+      - ./logs:/musicbot/logs

@@ -1,0 +1,18 @@
+version: "3"
+services:
+  kuma:
+    image: louislam/uptime-kuma
+    container_name: kuma
+    restart: unless-stopped
+    volumes: 
+      - kuma_data:/app/data
+    ports:
+      - 3001:3001
+
+volumes:
+  kuma_data:
+
+networks:
+  default:
+    name: nginx-proxy-network
+    external: true

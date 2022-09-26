@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    container_name: postgres
+    restart: always
+    volumes:
+      - data:/var/lib/postgresql/data
+      - ./scripts:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=nextcloud,piwigo
+      - POSTGRES_DB_FILE=/run/secrets/postgres_db
+      - POSTGRES_USER_FILE=/run/secrets/postgres_user
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password
+    secrets:
+      - postgres_db
+      - postgres_password
+      - postgres_user
+
+volumes:
+  data:
+
+networks:
+  default:
+    name: postgres-network
+
+secrets:
+  postgres_db:
+    file: ./postgres_db.txt 
+  postgres_password:
+    file: ./postgres_password.txt 
+  postgres_user:
+    file: ./postgres_user.txt 

@@ -1,0 +1,4 @@
+*.txt
+nginx-proxy-manager/letsencrypt
+nginx-proxy-manager/data
+pihole

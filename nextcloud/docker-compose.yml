@@ -16,7 +16,7 @@ services:
       - NEXTCLOUD_ADMIN_USER_FILE=/run/secrets/nextcloud_admin_user
     networks:
       - postgres
-      - default
+      - nginx-proxy-manager
     secrets:
       - nextcloud_admin_password
       - nextcloud_admin_user
@@ -28,7 +28,7 @@ volumes:
   data:
 
 networks:
-  default:
+  nginx-proxy-manager:
     name: nginx-proxy-network
     external: true
   postgres:

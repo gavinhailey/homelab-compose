@@ -1,6 +1,14 @@
-version: '3'
+version: "3"
 
 services:
+  agent:
+    image: portainer/agent:latest
+    container_name: portainer-agent-mbp
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/volumes:/var/lib/docker/volumes
+    networks:
+      - agent_network
   portainer:
     image: portainer/portainer-ce:latest
     container_name: portainer
@@ -11,12 +19,19 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
     ports:
-        - 9000:9000
+      - 9443:9443
+      - 8000:8000
+    networks:
+      - agent_network
+      - nginx-proxy-network
 
 volumes:
   portainer_data:
 
 networks:
-  default:
+  nginx-proxy-network:
     name: nginx-proxy-network
     external: true
+  agent_network:
+     driver: overlay
+     attachable: true

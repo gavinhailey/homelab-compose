@@ -98,6 +98,10 @@ services:
         subtitle: "Home Network VPN"
         tag: "tool"
         url: "https://pivpn.gavinhailey.dev"
+      - name: "YoPass"
+        logo: "assets/tools/yopass.png"
+        subtitle: "Secure Secret Sharing"
+        url: "https://yopass.gavinhailey.dev"
   - name: "Server"
     icon: "fas fa-server"
     items:

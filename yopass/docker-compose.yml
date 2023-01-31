@@ -1,0 +1,28 @@
+version: "3.0"
+
+services:
+  memcached:
+    image: memcached
+    container_name: memcached
+    restart: always
+    networks:
+      - memcached
+    expose:
+      - "11211"
+
+  yopass:
+    image: jhaals/yopass
+    container_name: yopass
+    restart: always
+    networks:
+      - nginx-proxy-manager
+      - memcached
+    ports:
+      - "1092:80"
+    command: "--memcached=memcached:11211 --port 80"
+
+networks:
+  nginx-proxy-manager:
+    name: nginx-proxy-network
+    external: true
+  memcached:
